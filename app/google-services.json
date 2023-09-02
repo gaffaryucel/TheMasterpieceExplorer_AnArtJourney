@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1064444449434",
+    "project_id": "historyofarts-42e0a",
+    "storage_bucket": "historyofarts-42e0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064444449434:android:6c2d72e819cddbd7dd8523",
+        "android_client_info": {
+          "package_name": "com.gaffaryucel.artbookhlttestingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064444449434-dvcad09ab3uc36f3cfg7jsjj464ooo81.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaffaryucel.artbookhlttestingapp",
+            "certificate_hash": "6d927f5818db51ec6fa92fd32e8b31ea25c40872"
+          }
+        },
+        {
+          "client_id": "1064444449434-m0420tda2h4ekm8b335fe39sp316rlib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0ZVLFAV7u4dk8EoSOKyBb0lWbpT_3dtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064444449434-m0420tda2h4ekm8b335fe39sp316rlib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
