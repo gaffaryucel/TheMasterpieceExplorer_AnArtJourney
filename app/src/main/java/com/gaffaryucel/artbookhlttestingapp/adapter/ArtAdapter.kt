@@ -1,7 +1,14 @@
 package com.gaffaryucel.artbookhlttestingapp.adapter
 
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,11 +17,13 @@ import com.bumptech.glide.RequestManager
 import com.gaffaryucel.artbookhlttestingapp.databinding.RowArtBinding
 import com.gaffaryucel.artbookhlttestingapp.model.ArtModel
 import com.gaffaryucel.artbookhlttestingapp.model.Hit
+import com.gaffaryucel.artbookhlttestingapp.view.ArtDetailsFragment
+import com.gaffaryucel.artbookhlttestingapp.view.ArtListFragmentDirections
 import javax.inject.Inject
 
-class ArtAdapter @Inject constructor(
-    val glide: RequestManager
-): RecyclerView.Adapter<ArtAdapter.ArtViewHolder>() {
+class ArtAdapter(
+    val listener : IdListener
+) : RecyclerView.Adapter<ArtAdapter.ArtViewHolder>() {
 
     private val diffUtil = object : DiffUtil.ItemCallback<ArtModel>(){
         override fun areItemsTheSame(oldItem: ArtModel, newItem: ArtModel): Boolean {
@@ -40,8 +49,10 @@ class ArtAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ArtViewHolder, position: Int) {
         val myart = artList[position]
         holder.binding.apply {
-            art = myart
-            glide.load(myart.imageUrl).into(artImage)
+            Glide.with(holder.itemView.context).load(myart.imageUrl).into(artImageViewInProfileRecyclerView)
+        }
+        holder.itemView.setOnClickListener{
+            listener.getId(myart.id.toString(),it)
         }
     }
 

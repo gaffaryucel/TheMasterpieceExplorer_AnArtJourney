@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/black"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/video_layout"
         android:layout_width="match_parent"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,15 +22,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/videoView"
-            android:layout_width="900dp"
-            android:layout_height="match_parent"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:id="@+id/sign_in_layout"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +81,7 @@
                     <TextView
                         style="@style/headerText"
                         android:layout_gravity="center"
-                        android:text="App Snipp"
+                        android:text="The Masterpiece Explorer"
                         android:layout_marginTop="40dp"/>
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -147,7 +148,7 @@
                                     android:layout_gravity="end"
                                     android:layout_marginTop="10dp"/>
 
-                                <Button
+                                <androidx.appcompat.widget.AppCompatButton
                                     android:id="@+id/cirLoginButton"
                                     style="@style/loginButton"
                                     android:text="Login"
@@ -173,4 +174,29 @@
 
         </ScrollView>
     </RelativeLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/sign_in_progress_bar"
+            android:layout_marginTop="300dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/sign_in_error_text"
+            android:layout_marginTop="300dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

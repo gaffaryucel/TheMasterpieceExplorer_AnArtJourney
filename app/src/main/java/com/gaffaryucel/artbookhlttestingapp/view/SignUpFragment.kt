@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.gaffaryucel.artbookhlttestingapp.MainActivity2
 import com.gaffaryucel.artbookhlttestingapp.databinding.FragmentSignUpBinding
+import com.gaffaryucel.artbookhlttestingapp.util.Status
 import com.gaffaryucel.artbookhlttestingapp.viewmodel.SignUpViewModel
 
 class SignUpFragment : Fragment() {
@@ -39,8 +41,7 @@ class SignUpFragment : Fragment() {
             viewModel.registerWithEmailAndPassword(name,email, password)
         }
         binding.goToSignInFragment.setOnClickListener{
-            val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment2()
-            Navigation.findNavController(it).navigate(action)
+            findNavController().popBackStack()
         }
         observeLiveData()
     }
@@ -53,6 +54,23 @@ class SignUpFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "İşlem başarısız \n daha sonra tekrar deneyiniz", Toast.LENGTH_SHORT).show()
                 // Giriş başarısız, hata mesajını kullanıcıya gösterebiliriz.
+            }
+        })
+        viewModel.registrationChecker.observe(viewLifecycleOwner, Observer {
+            when(it.status){
+                Status.SUCCESS->{
+                    binding.signUpProgressBar.visibility  = View.INVISIBLE
+                    binding.signUpErrorText.visibility = View.INVISIBLE
+                }
+                Status.LOADING->{
+                    binding.signUpProgressBar.visibility  = View.VISIBLE
+                    binding.signUpErrorText.visibility = View.INVISIBLE
+                }
+                Status.ERROR->{
+                    binding.signUpProgressBar.visibility  = View.INVISIBLE
+                    binding.signUpErrorText.visibility = View.VISIBLE
+                    binding.signUpErrorText.text = it.message
+                }
             }
         })
     }

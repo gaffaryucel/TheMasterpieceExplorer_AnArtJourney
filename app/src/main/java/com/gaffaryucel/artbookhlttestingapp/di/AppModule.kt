@@ -120,7 +120,7 @@ object AppModule {
         Room.databaseBuilder(
             context,
             ArtDatabase::class.java,
-            "RoomDatabaseversion2"
+            "Database_Version"
         ).build()
 
     @Provides

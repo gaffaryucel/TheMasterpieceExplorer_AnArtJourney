@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="image"
             type="com.gaffaryucel.artbookhlttestingapp.model.HomePageModel" />
     </data>
     <RelativeLayout
+        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,7 +36,7 @@
                 android:layout_margin="3dp"
                 android:padding="3dp"
                 android:text="@{image.artistName}"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -52,26 +54,56 @@
 
         <!--text view to display the caption
             in instagram post-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/actionsLayout"
+            android:layout_below="@+id/artImageView"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/likeImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="5dp"
+                android:src="@drawable/baseline_heart_broken_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+            </ImageView>
+            <ImageView
+                app:layout_constraintStart_toEndOf="@id/likeImageView"
+                android:id="@+id/commentImageView"
+                android:padding="5dp"
+                android:src="@drawable/baseline_comment_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+            </ImageView>
+            <ImageView
+                app:layout_constraintStart_toEndOf="@id/commentImageView"
+                android:id="@+id/shareImageView"
+                android:padding="5dp"
+                android:src="@drawable/baseline_send_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+            </ImageView>
+
+            <ImageView
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/saveImageView"
+                android:padding="5dp"
+                android:src="@drawable/baseline_save_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:textAlignment="center"
-            android:id="@+id/artDescription"
-            android:text="@{image.title}"
+            android:id="@+id/detailsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/artImageView"
-            android:layout_margin="6dp"
-            android:padding="5dp"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/detailsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/artDescription"
-            android:layout_centerHorizontal="true"
-            android:text="Detaylar"
+            android:textColor="@color/white"
+            android:layout_below="@id/actionsLayout"
+            android:textSize="15dp"
             tools:ignore="HardcodedText">
-        </Button>
+        </TextView>
     </RelativeLayout>
 </layout>

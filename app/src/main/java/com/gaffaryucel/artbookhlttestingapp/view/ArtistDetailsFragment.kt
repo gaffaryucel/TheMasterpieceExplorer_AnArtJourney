@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.gaffaryucel.artbookhlttestingapp.databinding.LayoutArtistDetailsBinding
 import com.gaffaryucel.artbookhlttestingapp.viewmodel.ArtistDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArtistDetailsFragment : Fragment() {

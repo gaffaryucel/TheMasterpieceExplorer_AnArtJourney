@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ArtDetailsFragment">
-
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/art_details_progress_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ProgressBar>
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/art_details_error_text"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#A10215"
+        android:text="error : something went wrong try again"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText">
+    </TextView>
     <ImageView
         android:id="@+id/art_image_view"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:src="@drawable/ic_launcher_background"
-        >
-    </ImageView>
-    <EditText
-        android:id="@+id/date_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/artist_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Artist"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/create_art_ll"
+        android:src="@drawable/select_image_icon"
+        />
+    <LinearLayout
+        android:layout_marginBottom="230dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/create_art_ll"
+        android:gravity="center"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:orientation="vertical">
 
-</LinearLayout>
+
+        <EditText
+            android:id="@+id/date_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/artist_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Artist"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

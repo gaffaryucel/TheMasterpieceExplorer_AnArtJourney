@@ -12,8 +12,9 @@
         android:title="Keşfet" />
 
     <item
-        android:id="@+id/asd"
-        android:title=""/>
+        android:id="@+id/navigation_create"
+        android:icon="@drawable/baseline_add_24"
+        android:title="Oluştur"/>
 
     <item
         android:id="@+id/navigation_home"

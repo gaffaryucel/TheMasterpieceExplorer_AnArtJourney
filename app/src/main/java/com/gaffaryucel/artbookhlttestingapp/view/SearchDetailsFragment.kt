@@ -30,11 +30,6 @@ class SearchDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SearchResultDetailsViewModel::class.java)
         val title = arguments?.getString("t")
         val description = arguments?.getString("d")
-        if (description.isNullOrEmpty()){
-            binding.contentTextView.visibility = View.GONE
-        }
-        binding.titleTextView.text = title
-        binding.contentTextView.text = description
         binding.webview.webViewClient = MyWebViewClient()
         var lasttext = ""
         if (title!!.contains("Period")){

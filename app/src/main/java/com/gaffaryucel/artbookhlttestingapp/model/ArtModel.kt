@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "Arts")
+@Entity(tableName = "artmodel")
 data class ArtModel(
     @ColumnInfo(name = "artName")
     val artName : String,

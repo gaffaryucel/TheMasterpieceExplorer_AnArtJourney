@@ -45,8 +45,11 @@
             android:id="@+id/action_artListFragment3_to_searchArtFragment"
             app:destination="@id/navigation_discover" />
         <action
-            android:id="@+id/action_artListFragment3_to_artDetailsFragment3"
-            app:destination="@id/navigation_add" />
+            android:id="@+id/action_navigation_arts_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_arts_to_navigation_create"
+            app:destination="@id/navigation_create" />
     </fragment>
 
     <fragment
@@ -72,20 +75,6 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_add"
-        android:name="com.gaffaryucel.artbookhlttestingapp.view.ArtDetailsFragment"
-        android:label="fragment_art_details"
-        tools:layout="@layout/fragment_art_details" >
-        <action
-            android:id="@+id/action_artDetailsFragment3_to_searchImageFragment2"
-            app:destination="@id/searchImageFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchImageFragment2"
-        android:name="com.gaffaryucel.artbookhlttestingapp.view.SearchImageFragment"
-        android:label="fragment_search_image"
-        tools:layout="@layout/fragment_search_image" />
-    <fragment
         android:id="@+id/workOfArtistFragment"
         android:name="com.gaffaryucel.artbookhlttestingapp.view.WorkOfArtistFragment"
         android:label="fragment_work_of_artist"
@@ -108,6 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/artistDetailsFragment"
+        tools:layout="@layout/layout_artist_details"
         android:name="com.gaffaryucel.artbookhlttestingapp.view.ArtistDetailsFragment"
         android:label="ArtistDetailsFragment" >
         <argument
@@ -116,10 +106,31 @@
     </fragment>
     <fragment
         android:id="@+id/workOfArtistDetailsFragment"
+        tools:layout="@layout/fragment_work_of_artist_details"
         android:name="com.gaffaryucel.artbookhlttestingapp.view.WorkOfArtistDetailsFragment"
         android:label="WorkOfArtistDetailsFragment" >
         <argument
             android:name="id"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.gaffaryucel.artbookhlttestingapp.view.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/searchImageFragment"
+        android:name="com.gaffaryucel.artbookhlttestingapp.view.SearchImageFragment"
+        android:label="fragment_search_image"
+        tools:layout="@layout/fragment_search_image" />
+    <fragment
+        android:id="@+id/navigation_create"
+        android:name="com.gaffaryucel.artbookhlttestingapp.view.ArtDetailsFragment"
+        android:label="fragment_art_details"
+        tools:layout="@layout/fragment_art_details" >
+        <action
+            android:id="@+id/action_artDetailsFragment2_to_searchImageFragment"
+            app:destination="@id/searchImageFragment" />
+    </fragment>
+
 </navigation>

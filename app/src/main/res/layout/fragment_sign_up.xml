@@ -46,7 +46,7 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
-                    android:text="App Snipp"
+                    android:text="The Masterpiece Explorer"
                     android:layout_marginTop="40dp"/>
                 <RelativeLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -81,7 +81,7 @@
                                 android:textColorHint="#9E9E9E"
                                 android:textColor="@color/black"
                                 style="@style/parent"
-                                android:layout_marginTop="@dimen/signup_text_margin_top">
+                                android:layout_marginTop="14dp">
                                 <EditText
                                     android:textColor="@color/black"
                                     android:id="@+id/nameEdittext"
@@ -96,7 +96,7 @@
                                 android:textColorHint="#9E9E9E"
                                 android:textColor="@color/black"
                                 style="@style/parent"
-                                android:layout_marginTop="@dimen/signup_text_margin_top">
+                                android:layout_marginTop="14dp">
                                 <EditText
                                     android:textColor="@color/black"
                                     android:id="@+id/emailEditText"
@@ -107,10 +107,10 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="14dp"
                                 android:textColorHint="#9E9E9E"
                                 android:textColor="@color/black"
-                                style="@style/parent"
-                                android:layout_marginTop="@dimen/signup_text_margin_top">
+                                style="@style/parent">
                                 <EditText
                                     android:textColor="@color/black"
                                     android:id="@+id/passwordEditText"
@@ -121,12 +121,14 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <Button
+                                android:layout_marginTop="14dp"
                                 android:id="@+id/signUpButton"
                                 style="@style/loginButton"
                                 android:layout_gravity="center"
                                 android:text="Register" />
 
                             <TextView
+                                android:layout_marginTop="14dp"
                                 android:id="@+id/goToSignInFragment"
                                 style="@style/parent"
                                 android:textAlignment="center"
@@ -141,5 +143,29 @@
         </RelativeLayout>
 
     </ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/sign_up_progress_bar"
+            android:layout_marginTop="300dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/sign_up_error_text"
+            android:layout_marginTop="300dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

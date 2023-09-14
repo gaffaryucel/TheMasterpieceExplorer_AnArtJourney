@@ -14,7 +14,6 @@ import com.gaffaryucel.artbookhlttestingapp.ui.notifications.NotificationsFragme
 import javax.inject.Inject
 
 class ArtFragmentFactory@Inject constructor (
-    val artAdapter: ArtAdapter,
     val workOfArtAdapter : WorkOfArtistAdapter,
     val artistAdapter : ArtistAdapter,
     val homePageAdapter : HomePageAdapter,
@@ -22,7 +21,6 @@ class ArtFragmentFactory@Inject constructor (
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when(className){
-            ArtListFragment::class.java.name->ArtListFragment(artAdapter)
             WorkOfArtistFragment::class.java.name->WorkOfArtistFragment(workOfArtAdapter)
             NotificationsFragment::class.java.name-> NotificationsFragment(artistAdapter,homePageAdapter)
             HomeFragment::class.java.name-> HomeFragment(likedArtistAdapter)

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gaffaryucel.artbookhlttestingapp.databinding.RowArtBinding
 import com.gaffaryucel.artbookhlttestingapp.databinding.RowItemBinding
+import com.gaffaryucel.artbookhlttestingapp.databinding.WorkOfArtistRowBinding
 import com.gaffaryucel.artbookhlttestingapp.model.ArtModel
 import com.gaffaryucel.artbookhlttestingapp.model.Hit
 import com.gaffaryucel.artbookhlttestingapp.model.PixabeyModel
@@ -28,16 +29,16 @@ class ImageAdapter (private val urlListener : UrlListener) :  RecyclerView.Adapt
     get() = recyclerListDiffer.currentList
     set(value) = recyclerListDiffer.submitList(value)
 
-    inner class ImageViewHolder(val binding: RowItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ImageViewHolder(val binding: WorkOfArtistRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val binding = RowItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = WorkOfArtistRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ImageViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image = artList[position]
-        Glide.with(holder.itemView.context).load(image.largeImageURL).into(holder.binding.imageView)
+        Glide.with(holder.itemView.context).load(image.largeImageURL).into(holder.binding.workofArtistImageView)
         holder.itemView.setOnClickListener{
             urlListener.getUrl(image.previewURL)
         }

@@ -64,11 +64,12 @@ class HomePageAdapter @Inject constructor(
         val sanatEseri = artList[position]
         glide.load(sanatEseri.image)
             .into(holder.binding.artImageView)
-        holder.binding.detailsButton.setOnClickListener{
+        holder.binding.detailsTextView.setOnClickListener{
             val title_for_send = sanatEseri.title.replace(" ","_")
             val action = NotificationsFragmentDirections.actionNavigationNotificationsToSearchDetailsFragment(title_for_send,"")
             Navigation.findNavController(it).navigate(action)
         }
+        holder.binding.detailsTextView.text = sanatEseri.title +"\n"+ sanatEseri.artistName +"\n"+ sanatEseri.yearAsString
         holder.binding.apply {
             image = sanatEseri
         }

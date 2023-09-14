@@ -8,6 +8,8 @@ import com.gaffaryucel.artbookhlttestingapp.model.ArtModel
 import com.gaffaryucel.artbookhlttestingapp.repo.ArtRepoInterface
 import com.gaffaryucel.artbookhlttestingapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +19,8 @@ class ArtDetailsViewModel @Inject constructor(
     private val repo : ArtRepoInterface
 ) : ViewModel() {
 
+    val arts = repo.observeArts()
+
     private var insertArtMsg = MutableLiveData<Resource<ArtModel>>()
     val message: LiveData<Resource<ArtModel>>
         get() = insertArtMsg
@@ -25,34 +29,44 @@ class ArtDetailsViewModel @Inject constructor(
     val imageUrl: LiveData<String>
         get() = selectedImage
 
-    fun setSelectedImage(url: String) {
+    private fun setSelectedImage(url: String) {
         selectedImage.postValue(url)
     }
 
-    suspend fun updateArt(art: ArtModel) = viewModelScope.launch{
+    fun updateArt(name: String, artist: String, year: String,url : String,id : Int) = viewModelScope.launch{
+        insertArtMsg.value = Resource.loading( null)
+        if (name.isEmpty() && artist.isEmpty() && year.isEmpty()) {
+            insertArtMsg.value = Resource.error("Please enter every info", null)
+            return@launch
+        }
+        val art = ArtModel(name, artist, year, url , id)
+        updateArt(art)
+        delay(500)
+        insertArtMsg.value = Resource.success( null)
+    }
+
+    private fun updateArt(art : ArtModel) = viewModelScope.launch{
         repo.updateArt(art)
     }
 
-    fun makeArt(name: String, artist: String, year: String) {
+
+    fun makeArt(name: String, artist: String, year: String,url : String) = viewModelScope.launch{
+        insertArtMsg.value = Resource.loading( null)
         if (name.isEmpty() || artist.isEmpty() || year.isEmpty()) {
             insertArtMsg.value = Resource.error("Please enter every info", null)
-            return
+            return@launch
         }
-        val yearInt = try {
-            year.toInt()
-            val art = ArtModel(name, artist, year, selectedImage.value ?: "www.google.com", 0)
-            insertArtMsg.value = Resource.success(art)
-            setSelectedImage("")
-        } catch (e: Exception) {
-            insertArtMsg.value = Resource.error("year must be Integer ", null)
-        }
+        val art = ArtModel(name, artist, year, url , null)
+        insertArt(art)
+        insertArtMsg.value = Resource.success( null)
     }
 
-    fun insertArt(art: ArtModel)= viewModelScope.launch {
+    private fun insertArt(art: ArtModel)= viewModelScope.launch {
         repo.insertArt(art)
     }
 
     fun deleteArt(artModel: ArtModel) = viewModelScope.launch {
         repo.deleteArt(artModel)
     }
+
 }

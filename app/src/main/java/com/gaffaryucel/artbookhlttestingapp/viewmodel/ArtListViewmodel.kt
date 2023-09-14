@@ -44,28 +44,16 @@ class ArtListViewModel  @Inject constructor(
         get() = images
 
     init {
-        searchImage("mona lisa")
         getUserData()
     }
 
-    fun searchImage(searchString : String){
-        if (searchString.isEmpty()){
-            return
-        }else{
-            images.value = Resource.loading(null)
-            viewModelScope.launch {
-                val response = repo.searchImage(searchString)
-                images.value = response
-            }
-        }
-    }
-
-    private fun getUserData() = viewModelScope.launch {
-        val likedArtistsRef = myRef.child("users").orderByKey()
+    fun getUserData() = viewModelScope.launch {
+        messageMld.value = Resource.loading(null)
+        val userDataRef = myRef.child("users").orderByKey()
             .equalTo(userId)
 
         // Listener ile verileri alın ve işleyin
-        likedArtistsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        userDataRef.addListenerForSingleValueEvent(object : ValueEventListener {
             @SuppressLint("NullSafeMutableLiveData")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 runBlocking {
@@ -77,8 +65,9 @@ class ArtListViewModel  @Inject constructor(
                                 userDataMld.value = user
                             }
                         }
+                        messageMld.value = Resource.success(null)
                     } else {
-                        println("Beğenilen sanatçı bulunamadı.")
+                        messageMld.value = Resource.error("Beğenilen sanatçı bulunamadı.",null)
                     }
                 }
 
@@ -89,4 +78,5 @@ class ArtListViewModel  @Inject constructor(
             }
         })
     }
+
 }

@@ -11,7 +11,7 @@ import com.gaffaryucel.artbookhlttestingapp.model.ArtModel
 
 @Dao
 interface ArtDao {
-    @Query("SELECT * FROM Arts")
+    @Query("SELECT * FROM artmodel")
     fun observeArts(): LiveData<List<ArtModel>>
 
     @Update
@@ -22,4 +22,5 @@ interface ArtDao {
 
     @Delete
     suspend fun deleteArt(artModel: ArtModel)
+
 }

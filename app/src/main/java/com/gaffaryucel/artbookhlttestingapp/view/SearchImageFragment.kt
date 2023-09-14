@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gaffaryucel.artbookhlttestingapp.adapter.ImageAdapter
 import com.gaffaryucel.artbookhlttestingapp.adapter.UrlListener
 import com.gaffaryucel.artbookhlttestingapp.databinding.FragmentSearchImageBinding
+import com.gaffaryucel.artbookhlttestingapp.util.Status
 import com.gaffaryucel.artbookhlttestingapp.viewmodel.ArtListViewModel
 import com.gaffaryucel.artbookhlttestingapp.viewmodel.SearchImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +30,8 @@ import kotlinx.coroutines.launch
 class SearchImageFragment : Fragment(), UrlListener {
 
     private lateinit var binding: FragmentSearchImageBinding
-    private lateinit var viewModel: ArtListViewModel
+    private lateinit var viewModel: SearchImageViewModel
     private lateinit var adapter : ImageAdapter
-    private var imageUrl : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,7 @@ class SearchImageFragment : Fragment(), UrlListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ArtListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SearchImageViewModel::class.java)
 
         binding.searchEdittext.setOnQueryTextListener(object :androidx.appcompat.widget.SearchView.OnQueryTextListener{
             private var searchJob: Job? = null
@@ -51,7 +51,7 @@ class SearchImageFragment : Fragment(), UrlListener {
                 searchJob?.cancel()
                 searchJob = CoroutineScope(Dispatchers.Main).launch {
                     if(!query.isNullOrEmpty()) {
-                        delay(1000)
+                        delay(500)
                         viewModel.searchImage(query.toString())
                     }
                 }
@@ -62,7 +62,7 @@ class SearchImageFragment : Fragment(), UrlListener {
                 searchJob?.cancel()
                 searchJob = CoroutineScope(Dispatchers.Main).launch {
                     if (!newText.isNullOrEmpty()) {
-                        delay(1000)
+                        delay(500)
                         viewModel.searchImage(newText.toString())
                     }
                 }
@@ -80,6 +80,25 @@ class SearchImageFragment : Fragment(), UrlListener {
                 adapter.artList = it.data.hits
             }
             binding.searchRecyclerView.adapter = adapter
+        })
+        viewModel.message.observe(viewLifecycleOwner, Observer {
+            when(it.status){
+                Status.SUCCESS->{
+                    binding.searchImageProgressBar.visibility = View.INVISIBLE
+                    binding.searchRecyclerView.visibility = View.VISIBLE
+                    binding.searchImageErrorText.visibility = View.INVISIBLE
+                }
+                Status.LOADING->{
+                    binding.searchImageProgressBar.visibility = View.VISIBLE
+                    binding.searchRecyclerView.visibility = View.INVISIBLE
+                    binding.searchImageErrorText.visibility = View.INVISIBLE
+                }
+                Status.ERROR->{
+                    binding.searchImageProgressBar.visibility = View.INVISIBLE
+                    binding.searchRecyclerView.visibility = View.INVISIBLE
+                    binding.searchImageErrorText.visibility = View.VISIBLE
+                }
+            }
         })
     }
     override fun getUrl(url: String) {
